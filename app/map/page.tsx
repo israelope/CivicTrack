@@ -7,6 +7,8 @@ import { headers } from 'next/headers'
 // Import your new wrapper component instead
 import MapLoader from '@/components/MapLoader'
 
+export const dynamic = 'force-dynamic'
+
 // This function fetches all complaints from Supabase (Stays the same)
 async function getComplaints() {
   const supabase = createClient(

@@ -3,6 +3,8 @@ import { Complaint } from '@/lib/types'
 import TopIssuesChart from '@/components/TopIssuesChart'
 import HotspotList from '@/components/HotspotList'
 
+export const dynamic = 'force-dynamic'
+
 // This function fetches all complaints (same as the map page)
 async function getComplaints() {
   const supabase = createClient(

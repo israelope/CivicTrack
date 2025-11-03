@@ -16,7 +16,7 @@ export default function Navbar() {
             className="text-2xl font-bold text-blue-600" 
             onClick={() => setIsOpen(false)} // Close menu on logo click
           >
-            🏙️ CivicTrack
+            CivicTrack
           </Link>
 
           {/* Desktop Navigation Links */}
