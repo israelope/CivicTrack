@@ -35,7 +35,7 @@ To run this project for your own community, follow these steps:
 ### 1\. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/civic-track.git
+git clone https://github.com/israelope/civictrack.git
 cd civic-track
 ```
 
