@@ -1,4 +1,4 @@
-'use client' // This must be a client component
+'use client' 
 
 import { useState } from 'react'
 import {
@@ -7,37 +7,75 @@ import {
   Marker,
   useMapEvents,
 } from 'react-leaflet'
-import 'leaflet/dist/leaflet.css'
-import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css'
 import 'leaflet-defaulticon-compatibility'
 
-// This component is the "brains" of the map
-function LocationMarker({ onPositionChange }: { onPositionChange: (pos: [number, number]) => void }) {
-  // Start with a state for the position
-  const [position, setPosition] = useState<[number, number] | null>(null)
+// Define the new props for the component
+interface MapPickerProps {
+  onPositionChange: (pos: [number, number]) => void;
+  onNeighborhoodChange: (name: string) => void; // <-- New prop
+}
 
-  // Get the map instance and add a click event listener
+function LocationMarker({ onPositionChange, onNeighborhoodChange }: MapPickerProps) {
+  const [position, setPosition] = useState<[number, number] | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
+
   const map = useMapEvents({
-    click(e) {
+    async click(e) {
+      setIsLoading(true) // Start loading
       const newPos: [number, number] = [e.latlng.lat, e.latlng.lng]
+      
+      // 1. Update position state and fly map
       setPosition(newPos)
-      onPositionChange(newPos) // Pass the new position back to the parent form
-      map.flyTo(e.latlng, map.getZoom()) // Center the map on the new marker
+      onPositionChange(newPos)
+      map.flyTo(e.latlng, map.getZoom())
+
+      // 2. Start reverse geocoding fetch
+      try {
+        const response = await fetch(
+          `https://nominatim.openstreetmap.org/reverse?format=json&lat=${newPos[0]}&lon=${newPos[1]}`
+        )
+        const data = await response.json()
+        
+        // 3. Build a simple, clean name from the address details
+        const address = data.address || {}
+        const neighborhood = address.neighbourhood || address.suburb || address.road || 'Unknown Area'
+        
+        // 4. Send the name back to the form
+        onNeighborhoodChange(neighborhood)
+        
+      } catch (error) {
+        console.error("Error reverse geocoding:", error)
+        onNeighborhoodChange("Error finding name")
+      } finally {
+        setIsLoading(false) // Stop loading
+      }
     },
   })
 
-  // Render the marker at the clicked position
-  return position === null ? null : (
-    <Marker position={position}></Marker>
+  return (
+    <>
+      {isLoading && (
+        <div className="leaflet-top leaflet-center">
+          <div className="leaflet-control leaflet-bar p-2 bg-white shadow">
+            Loading area...
+          </div>
+        </div>
+      )}
+      {position !== null && <Marker position={position}></Marker>}
+    </>
   )
 }
 
-// This is the main component you'll import into your page
-export default function MapPicker({ onPositionChange }: { onPositionChange: (pos: [number, number]) => void }) {
+export default function MapPicker({ onPositionChange, onNeighborhoodChange }: MapPickerProps) {
+  
+  // ... (your map customization comments) ...
+  const defaultCenter: [number, number] = [7.3775, 3.9470]; // Oyo State
+  const defaultZoom = 9; 
+  
   return (
     <MapContainer
-      center={[9.0820, 8.6753]} // Default center (approx. center of Nigeria)
-      zoom={6}
+      center={defaultCenter}
+      zoom={defaultZoom}
       scrollWheelZoom={false}
       style={{ height: '300px', width: '100%', borderRadius: '8px' }}
     >
@@ -45,7 +83,10 @@ export default function MapPicker({ onPositionChange }: { onPositionChange: (pos
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <LocationMarker onPositionChange={onPositionChange} />
+      <LocationMarker 
+        onPositionChange={onPositionChange} 
+        onNeighborhoodChange={onNeighborhoodChange} // <-- Pass prop
+      />
     </MapContainer>
   )
 }

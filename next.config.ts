@@ -1,13 +1,17 @@
 import type { NextConfig } from 'next'
 
 const config: NextConfig = {
+  // --- ADD THIS LINE ---
+  reactStrictMode: false,
+  // ---------------------
+
   images: {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'fokulqjoozrbfhjbmdzh.supabase.co', // <-- This was the missing property
+        hostname: 'fokulqjoozrbfhjbmdzh.supabase.co',
         port: '',
-        pathname: '/storage/v1/object/public/complaint_images/**', // Only allows images from this bucket
+        pathname: '/storage/v1/object/public/complaint_images/**',
       },
     ],
   },

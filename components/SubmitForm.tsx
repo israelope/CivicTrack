@@ -3,28 +3,21 @@
 import { useState } from 'react'
 import { supabase } from '@/lib/supabaseClient' 
 import { useRouter } from 'next/navigation'
-import dynamic from 'next/dynamic' // <-- Import dynamic
+import dynamic from 'next/dynamic' 
+import 'leaflet/dist/leaflet.css' // <-- Import CSS here
+// We don't need leaflet-defaulticon-compatibility CSS if using the JS fix
 
-
-// Dynamically import the MapPicker, disable Server-Side Rendering (ssr)
-const MapPicker = dynamic(() => import('@/components/MapPicker'),  {
+const MapPicker = dynamic(() => import('@/components/MapPicker'), {
   ssr: false,
-  loading: () => <p>Loading map...</p> // Show a loading message
+  loading: () => <p>Loading map...</p>
 })
 
 export default function SubmitForm() {
   const [category, setCategory] = useState('')
   const [description, setDescription] = useState('')
   const [file, setFile] = useState<File | null>(null)
-  
-  // Remove old latitude/longitude state
-  // const [latitude, setLatitude] = useState('')
-  // const [longitude, setLongitude] = useState('')
-
-  // Add new state for the map's position
   const [position, setPosition] = useState<[number, number] | null>(null)
-  
-  const [neighborhood, setNeighborhood] = useState('')
+  const [neighborhood, setNeighborhood] = useState('') // This will be set by the map
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   
@@ -36,15 +29,20 @@ export default function SubmitForm() {
     }
   }
 
-  // This handler will be passed to the MapPicker component
   const handlePositionChange = (pos: [number, number]) => {
     setPosition(pos)
+  }
+
+  // --- ADD THIS NEW HANDLER ---
+  // This function will be called by the MapPicker component
+  // when it finishes fetching the neighborhood name.
+  const handleNeighborhoodChange = (name: string) => {
+    setNeighborhood(name)
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     
-    // Update validation to check for 'position'
     if (!category || !description || !file || !position || !neighborhood) {
       setError('Please fill out all fields, upload a photo, and select a location on the map.')
       return
@@ -84,8 +82,8 @@ export default function SubmitForm() {
           category,
           description,
           imageUrl,
-          latitude: position[0], // <-- Get from 'position' state
-          longitude: position[1], // <-- Get from 'position' state
+          latitude: position[0], 
+          longitude: position[1], 
           neighborhood,
         }),
       })
@@ -98,7 +96,7 @@ export default function SubmitForm() {
       setIsLoading(false)
       alert('Complaint submitted successfully!')
       router.push('/') 
-      router.refresh() // Refresh the page to clear the form
+      router.refresh() 
 
     } catch (err: any) {
       setError(err.message)
@@ -163,15 +161,18 @@ export default function SubmitForm() {
           />
         </div>
 
-        {/* === NEW MAP SECTION === */}
+        {/* === MAP SECTION === */}
         <div className="p-4 bg-gray-50 rounded-md">
           <h3 className="font-medium text-gray-800 mb-2">Location</h3>
           <p className="text-sm text-gray-600 mb-4">
             Click on the map to set the issue's location.
           </p>
           
-          {/* This is the new map component */}
-          <MapPicker onPositionChange={handlePositionChange} />
+          {/* --- PASS THE NEW HANDLER TO THE MAP --- */}
+          <MapPicker 
+            onPositionChange={handlePositionChange}
+            onNeighborhoodChange={handleNeighborhoodChange}
+          />
           
           {/* We still need the neighborhood field */}
           <div className="mt-4">
@@ -181,15 +182,15 @@ export default function SubmitForm() {
             <input 
               type="text" 
               id="neighborhood" 
-              value={neighborhood} 
-              onChange={(e) => setNeighborhood(e.target.value)}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-              placeholder="e.g., Main Street Area" 
+              value={neighborhood} // Value is controlled by state
+              onChange={(e) => setNeighborhood(e.target.value)} // Allow override
+              className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm bg-gray-100"
+              placeholder="Click map to auto-fill" 
               required
             />
           </div>
         </div>
-        {/* === END NEW MAP SECTION === */}
+        {/* === END MAP SECTION === */}
 
         {error && (
           <p className="text-red-600 text-sm">{error}</p>

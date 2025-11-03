@@ -1,16 +1,30 @@
 'use client'
 
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
-import { Complaint } from '@/lib/types' // Import the type we just made
+import { Complaint } from '@/lib/types'
 import Image from 'next/image'
+
+// --- ADD THIS JS IMPORT ---
+import 'leaflet-defaulticon-compatibility'
+// ---------------------------
 
 // This component receives the list of complaints as a 'prop'
 export default function LiveMap({ complaints }: { complaints: Complaint[] }) {
+
+  // -----------------------------------------------------------------
+  // -- 📍 CUSTOMIZE MAP LOCATION --
+  //
+  // Set your community's default location and zoom level here.
+  // Example for Oyo State, Nigeria:
+  // -----------------------------------------------------------------
+  const defaultCenter: [number, number] = [7.3775, 3.9470]; // Oyo State
+  const defaultZoom = 9; // Zoom level for a state
+  
   return (
     <MapContainer
-      center={[9.0820, 8.6753]} // Default center (approx. center of Nigeria)
-      zoom={6}
-      scrollWheelZoom={true} // Allow zooming
+      center={defaultCenter}
+      zoom={defaultZoom}
+      scrollWheelZoom={true} 
       style={{ height: '100%', width: '100%' }}
     >
       <TileLayer
@@ -18,19 +32,16 @@ export default function LiveMap({ complaints }: { complaints: Complaint[] }) {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       
-      {/* Loop over every complaint and create a Marker for it */}
       {complaints.map((complaint) => (
         <Marker
           key={complaint.id}
           position={[complaint.latitude, complaint.longitude]}
         >
-          {/* This is the popup that appears when you click a marker */}
           <Popup>
             <div className="w-60">
               <h3 className="font-bold text-lg mb-1">{complaint.category}</h3>
               <p className="text-sm text-gray-600 mb-2">{complaint.neighborhood}</p>
               
-              {/* Show the image */}
               <div className="relative w-full h-40 rounded-md overflow-hidden mb-2">
                 <Image
                   src={complaint.image_url}
