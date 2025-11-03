@@ -3,6 +3,8 @@ import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import 'leaflet/dist/leaflet.css'
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css'
+import Link from 'next/link'
+import Navbar from "@/components/Navbar";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,7 +20,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "CivicTrak",
-  description: "The solution to Communitie issues",
+  description: "Report and track civic issues in your community",
 };
 
 export default function RootLayout({
@@ -28,10 +30,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className={inter.className}>
+        {/* 2. ADD THIS HEADER SECTION */}
+        <Navbar/>
+
+        {/* 3. YOUR PAGE CONTENT WILL RENDER HERE */}
+        <main className="bg-black-50 min-h-screen">
+          {children}
+        </main>
+        
       </body>
     </html>
   );
