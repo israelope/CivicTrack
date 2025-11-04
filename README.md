@@ -81,6 +81,40 @@ This is where the true power of CivicTrack lies. This is the "why" of the projec
 * **Charts:** Recharts (Open Source)
 
 
+
+```markdown
+## 🚀 Live Demo
+
+You can try the live application here: **[https://civictrack-puce.vercel.app/](https://civictrack-puce.vercel.app/)**
+```
+
+
+## 📸 Screenshots
+
+| Report Form | Live Map | Dashboard |
+| :---: | :---: | :---: |
+| ![CivicTrack Report Form](public/screenshot-form.png) | ![CivicTrack Live Map](public/screenshot-map.png) | ![CivicTrack Dashboard](public/screenshot-dashboard.png) |
+```
+
+## 🛣️ Future Roadmap
+
+This MVP is a strong foundation. Future plans to expand the project include:
+
+* **Admin Dashboard:** A separate, password-protected area for admins to edit categories and map locations directly from the UI, without touching the code.
+* **"Resolved" Status:** Allowing admins to mark issues as "In Progress" or "Resolved," which would then change the pin's color on the live map.
+* **Map Search Bar:** Integrating a geocoding search bar so users can type their address instead of just clicking the map.
+```
+
+## ⚖️ License
+
+This project is open-source and available under the [MIT License](LICENSE).
+```
+
+*(To make this work, create a new file in your project's root folder named `LICENSE` and paste the text of the MIT license into it. You can find it by searching "MIT License text".)*
+
+
+
+
 ## 🚀 Getting Started
 
 To run this project for your own community, follow these steps:
