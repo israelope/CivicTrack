@@ -2,8 +2,13 @@
 
 CivicTrack is an open-source, public good platform that empowers citizens to report, map, and prioritize local civic issues. It's built to be easily cloned, configured, and deployed by any community or local government.
 
+
 ### The Problem
 
+In many communities, there's a critical information gap between citizens and local government. This gap exists in two ways:
+
+1.  **Reactive:** Citizens have no simple, transparent way to report *existing problems* like potholes or broken streetlights. Their complaints often feel lost.
+2.  **Proactive:** Governments have no easy, data-driven way to find out what new social amenities or fixes citizens *actually want* for the future. How do they decide between building a new park, a new clinic, or upgrading roads? They are often forced to guess.
 In many communities, there's a critical information gap between citizens and local government. This gap exists in two ways:
 
 1.  **Reactive:** Citizens have no simple, transparent way to report *existing problems* like potholes or broken streetlights. Their complaints often feel lost.
@@ -11,6 +16,7 @@ In many communities, there's a critical information gap between citizens and loc
 
 ### The Solution
 
+CivicTrack is a flexible, open-source platform that solves both problems at once. It turns a simple form into a powerful tool for data-driven civic prioritization.
 CivicTrack is a flexible, open-source platform that solves both problems at once. It turns a simple form into a powerful tool for data-driven civic prioritization.
 
 1.  **Report & Request (The Configurable Form):**
@@ -82,8 +88,8 @@ To run this project for your own community, follow these steps:
 ### 1\. Clone the Repository
 
 ```bash
-git clone https://github.com/israelope/civictrack.git
-cd civic-track
+git clone https://github.com/israelope/Civictrack.git
+cd civictrack
 ```
 
 ### 2\. Install Dependencies
