@@ -3,19 +3,30 @@
 
 CivicTrack is an open-source, public good platform that empowers citizens to report, map, and prioritize local civic issues. It's built to be easily cloned, configured, and deployed by any community or local government.
 
+
 ### The Problem
 
-In many communities, reporting problems like potholes, broken streetlights, or trash buildup is a confusing process. There's no single place to see what has already been reported, and no way for the community to visualize which problems are the most urgent.
+In many communities, there's a critical information gap between citizens and local government. This gap exists in two ways:
+
+1.  **Reactive:** Citizens have no simple, transparent way to report *existing problems* like potholes or broken streetlights. Their complaints often feel lost.
+2.  **Proactive:** Governments have no easy, data-driven way to find out what new social amenities or fixes citizens *actually want* for the future. How do they decide between building a new park, a new clinic, or upgrading roads? They are often forced to guess.
 
 ### The Solution
 
-This app solves that by providing a simple, three-part solution:
+CivicTrack is a flexible, open-source platform that solves both problems at once. It turns a simple form into a powerful tool for data-driven civic prioritization.
 
-1.  **Report:** A simple, mobile-friendly form to submit a complaint. It automatically reverse-geocodes the user's clicked location to find the neighborhood name.
-2.  **Map:** A live, interactive map that displays all submitted issues as pins for everyone to see.
-3.  **Prioritize:** A public dashboard that automatically identifies and ranks the most common issues (e.g., "Potholes") and the "hotspot" neighborhoods with the most reports, giving leaders a clear, data-driven path for action.
+1.  **Report & Request (The Configurable Form):**
+    A simple, mobile-friendly form. As an **open-source tool**, this form is fully configurable by any local government:
+    * **For Complaints:** It can be used to track *existing problems* (e.g., "Pothole," "Trash Buildup").
+    * **For Feedback:** A government can set the categories to *proactively poll their citizens* (e.g., "New Community Park," "Better Water Supply," "Road Repair"). Citizens then "vote" by making a submission for the amenity they want.
 
------
+2.  **Map (The "Where"):**
+    A live, interactive map displays all submissions. This shows *where* problems are clustered and, more importantly, *where* the demand for new social amenities is highest.
+
+3.  **Prioritize (The "Hierarchy"):**
+    This is the core of the app. The public dashboard automatically analyzes and ranks all submissions. A leader can now see—in one place—that **"Potholes"** are the #1 *complaint* and a **"New Community Park"** is the #1 *request*.
+
+This gives governments a clear, data-driven hierarchy to decide what to fix and what to build next, all based on direct citizen feedback.
 
 ## 🧰 Tech Stack
 
@@ -35,8 +46,8 @@ To run this project for your own community, follow these steps:
 ### 1\. Clone the Repository
 
 ```bash
-git clone https://github.com/israelope/civictrack.git
-cd civic-track
+git clone https://github.com/israelope/Civictrack.git
+cd civictrack
 ```
 
 ### 2\. Install Dependencies
