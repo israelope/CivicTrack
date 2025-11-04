@@ -1,9 +1,9 @@
-'use client' 
+'use client'
 
 import { useState } from 'react'
-import { supabase } from '@/lib/supabaseClient' 
+import { supabase } from '@/lib/supabaseClient'
 import { useRouter } from 'next/navigation'
-import dynamic from 'next/dynamic' 
+import dynamic from 'next/dynamic'
 import 'leaflet/dist/leaflet.css' // <-- Import CSS here
 // We don't need leaflet-defaulticon-compatibility CSS if using the JS fix
 
@@ -20,7 +20,7 @@ export default function SubmitForm() {
   const [neighborhood, setNeighborhood] = useState('') // This will be set by the map
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  
+
   const router = useRouter()
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,7 +42,7 @@ export default function SubmitForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     if (!category || !description || !file || !position || !neighborhood) {
       setError('Please fill out all fields, upload a photo, and select a location on the map.')
       return
@@ -55,10 +55,10 @@ export default function SubmitForm() {
       // 1. Upload the image to Supabase Storage
       const fileExt = file.name.split('.').pop()
       const fileName = `${Date.now()}.${fileExt}`
-      const filePath = `${fileName}` 
+      const filePath = `${fileName}`
 
       const { error: uploadError } = await supabase.storage
-        .from('complaint_images') 
+        .from('complaint_images')
         .upload(filePath, file)
 
       if (uploadError) {
@@ -82,8 +82,8 @@ export default function SubmitForm() {
           category,
           description,
           imageUrl,
-          latitude: position[0], 
-          longitude: position[1], 
+          latitude: position[0],
+          longitude: position[1],
           neighborhood,
         }),
       })
@@ -92,11 +92,11 @@ export default function SubmitForm() {
         const resJson = await response.json()
         throw new Error(resJson.error || 'Failed to submit complaint')
       }
-      
+
       setIsLoading(false)
       alert('Complaint submitted successfully!')
-      router.push('/') 
-      router.refresh() 
+      router.push('/')
+      router.refresh()
 
     } catch (err: any) {
       setError(err.message)
@@ -107,7 +107,7 @@ export default function SubmitForm() {
   return (
     <div className="max-w-xl mx-auto p-4 my-8">
       <h1 className="text-3xl font-bold mb-6">Report a New Issue</h1>
-      
+
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Category and Description fields (no change) */}
         <div>
@@ -167,25 +167,25 @@ export default function SubmitForm() {
           <p className="text-sm text-gray-600 mb-4">
             Click on the map to set the issue's location.
           </p>
-          
+
           {/* --- PASS THE NEW HANDLER TO THE MAP --- */}
-          <MapPicker 
+          <MapPicker
             onPositionChange={handlePositionChange}
             onNeighborhoodChange={handleNeighborhoodChange}
           />
-          
+
           {/* We still need the neighborhood field */}
           <div className="mt-4">
             <label htmlFor="neighborhood" className="block text-sm font-medium text-gray-700">
               Neighborhood / Area Name
             </label>
-            <input 
-              type="text" 
-              id="neighborhood" 
+            <input
+              type="text"
+              id="neighborhood"
               value={neighborhood} // Value is controlled by state
               onChange={(e) => setNeighborhood(e.target.value)} // Allow override
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm bg-gray-100"
-              placeholder="Click map to auto-fill" 
+              className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm bg-gray-100 text-gray-900"
+              placeholder="Click a locaation on the map to auto-fill"
               required
             />
           </div>

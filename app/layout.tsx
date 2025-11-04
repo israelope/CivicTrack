@@ -35,7 +35,7 @@ export default function RootLayout({
         <Navbar/>
 
         {/* 3. YOUR PAGE CONTENT WILL RENDER HERE */}
-        <main className="bg-black-50 min-h-screen">
+        <main className="bg-black-50 min-h-screen pt-16">
           {children}
         </main>
         
