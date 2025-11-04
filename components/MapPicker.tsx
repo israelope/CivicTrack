@@ -68,9 +68,14 @@ function LocationMarker({ onPositionChange, onNeighborhoodChange }: MapPickerPro
 
 export default function MapPicker({ onPositionChange, onNeighborhoodChange }: MapPickerProps) {
   
-  // ... (your map customization comments) ...
-  const defaultCenter: [number, number] = [7.3775, 3.9470]; // Oyo State
-  const defaultZoom = 9; 
+  // -----------------------------------------------------------------
+  // -- 📍 CUSTOMIZE MAP LOCATION --
+  //
+  // Set your community's default location and zoom level here.
+  // Example for Bengaluru, India:
+  // -----------------------------------------------------------------
+  const defaultCenter: [number, number] = [12.97, 77.59]; // Bengaluru
+  const defaultZoom = 11; // Zoom level for a city
   
   return (
     <MapContainer
@@ -85,7 +90,7 @@ export default function MapPicker({ onPositionChange, onNeighborhoodChange }: Ma
       />
       <LocationMarker 
         onPositionChange={onPositionChange} 
-        onNeighborhoodChange={onNeighborhoodChange} // <-- Pass prop
+        onNeighborhoodChange={onNeighborhoodChange} 
       />
     </MapContainer>
   )

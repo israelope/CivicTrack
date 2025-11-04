@@ -4,8 +4,7 @@ import { useState } from 'react'
 import { supabase } from '@/lib/supabaseClient'
 import { useRouter } from 'next/navigation'
 import dynamic from 'next/dynamic'
-import 'leaflet/dist/leaflet.css' // <-- Import CSS here
-// We don't need leaflet-defaulticon-compatibility CSS if using the JS fix
+import 'leaflet/dist/leaflet.css' 
 
 const MapPicker = dynamic(() => import('@/components/MapPicker'), {
   ssr: false,
