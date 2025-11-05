@@ -1,7 +1,20 @@
+
 # 🏙️ CivicTrack
 
 CivicTrack is an open-source, public good platform that empowers citizens to report, map, and prioritize local civic issues. It's built to be easily cloned, configured, and deployed by any community or local government.
 
+## 🚀 Live Demo
+
+You can try the live application here: **[https://civictrack-puce.vercel.app/](https://civictrack-puce.vercel.app/)**
+
+## 📸 Screenshots
+
+| Report Form | Live Map | Dashboard |
+| :---: | :---: | :---: |
+| ![CivicTrack Report Form](public/screenshot-form.png) | ![CivicTrack Live Map](public/screenshot-map.png) | ![CivicTrack Dashboard](public/screenshot-dashboard.png) |
+
+
+---
 
 ### The Problem
 
@@ -9,14 +22,9 @@ In many communities, there's a critical information gap between citizens and loc
 
 1.  **Reactive:** Citizens have no simple, transparent way to report *existing problems* like potholes or broken streetlights. Their complaints often feel lost.
 2.  **Proactive:** Governments have no easy, data-driven way to find out what new social amenities or fixes citizens *actually want* for the future. How do they decide between building a new park, a new clinic, or upgrading roads? They are often forced to guess.
-In many communities, there's a critical information gap between citizens and local government. This gap exists in two ways:
-
-1.  **Reactive:** Citizens have no simple, transparent way to report *existing problems* like potholes or broken streetlights. Their complaints often feel lost.
-2.  **Proactive:** Governments have no easy, data-driven way to find out what new social amenities or fixes citizens *actually want* for the future. How do they decide between building a new park, a new clinic, or upgrading roads? They are often forced to guess.
 
 ### The Solution
 
-CivicTrack is a flexible, open-source platform that solves both problems at once. It turns a simple form into a powerful tool for data-driven civic prioritization.
 CivicTrack is a flexible, open-source platform that solves both problems at once. It turns a simple form into a powerful tool for data-driven civic prioritization.
 
 1.  **Report & Request (The Configurable Form):**
@@ -38,36 +46,25 @@ This gives governments a clear, data-driven hierarchy to decide what to fix and 
 
 At its heart, CivicTrack is a flexible, data-driven bridge between a community and its leaders. It's designed to be a "plug-and-play" solution for any local government or community group to instantly gather, visualize, and *act on* public feedback.
 
-It solves two fundamental problems of governance:
-
-1.  **The Reactive Problem:** "Where are our biggest *existing* problems?"
-2.  **The Proactive Problem:** "What do our citizens *want* us to build or fix next?"
-
----
-
 ### The Citizen Experience (The "Input")
 
-This is focused on making reporting and feedback as simple as possible.
-
 * **Step 1: Report an Issue or Request:** The citizen visits the homepage. They see a simple, mobile-friendly form.
-* **Step 2: Select a Category:** They choose from a dropdown list. This list is **100% configurable by the admin**. It could be *complaints* (like "Pothole," "Trash") or *proposals* (like "New Park," "Better Water Supply").
-* **Step 3: Provide Rich Detail:** The user adds a description and uploads a photo directly from their phone for visual proof.
-* **Step 4: "Smart" Location Pinning:** The user clicks on the interactive map (centered on their city) to place a pin. The app then **automatically reverse-geocodes** these coordinates to find the neighborhood name (e.g., "Doddaballapura Taluk"), saving the user from typing it.
-* **Step 5: Transparency and Validation:** After submitting, the citizen can visit the **Live Map** page. They can see their own pin on the map along with everyone else's. This provides immediate, public confirmation that their voice has been heard.
+* **Step 2: Select a Category:** They choose from a dropdown list. This list is **100% configurable by the admin**.
+* **Step 3: Provide Rich Detail:** The user adds a description and uploads a photo directly from their phone.
+* **Step 4: "Smart" Location Pinning:** The user clicks on the interactive map (centered on their city) to place a pin. The app then **automatically reverse-geocodes** these coordinates to find the neighborhood name.
+* **Step 5: Transparency and Validation:** After submitting, the citizen can visit the **Live Map** page to see their pin on the map along with everyone else's.
 
-#### The Admin Experience (The "Actionable Output")
-
-This is where the true power of CivicTrack lies. This is the "why" of the project.
+### The Admin Experience (The "Actionable Output")
 
 * **Step 1: Easy Configuration:** The admin (a local government's IT team) clones the open-source GitHub repo.
 * **Step 2: Personalize the App:** In just 5 minutes, they can:
-    * **Set the Map:** Open one file (`MapPicker.tsx`) and change the coordinates to center the map on their own city (e.g., Bengaluru).
-    * **Define the Goal:** Open another file (`SubmitForm.tsx`) and change the `<option>` tags to define the project's purpose—tracking problems or polling for new amenities.
-* **Step 3: Deploy for Free:** They deploy the app to Vercel and connect it to a free Supabase backend. The tool is now live for their community.
-* **Step 4: Get Data-Driven Insights (The Dashboard):** As submissions come in, the admin visits the **Dashboard** page. They don't see a messy spreadsheet; they see instant answers.
-    * **The "What" (Top Issues):** The bar chart gives them a quantitative hierarchy of the biggest issues. They can see that "Potholes" are a 10x bigger problem than "Broken Streetlights."
-    * **The "Where" (Hotspot Areas):** The ranked list shows them which neighborhoods are generating the most reports.
-* **Step 5: Make an Informed Decision:** The admin can now make an objective, defensible decision. Instead of guessing, they can say: "Our data shows that the #1 citizen priority is road repair, and the #1 hotspot is the 'Devanahalli' area. We will deploy our budget there first."
+    * **Set the Map:** Open `components/MapPicker.tsx` and `components/LiveMap.tsx` to change the default coordinates to their city.
+    * **Define the Goal:** Open `components/SubmitForm.tsx` and change the `<option>` tags to define their community's needs.
+* **Step 3: Deploy for Free:** They deploy the app to Vercel and connect it to a free Supabase backend.
+* **Step 4: Get Data-Driven Insights (The Dashboard):** The admin visits the **Dashboard** page to see instant answers.
+    * **The "What" (Top Issues):** A bar chart gives them a quantitative hierarchy of the biggest issues.
+    * **The "Where" (Hotspot Areas):** A ranked list shows them which neighborhoods are generating the most reports.
+* **Step 5: Make an Informed Decision:** The admin can now make an objective, defensible decision based on real-time citizen data.
 
 ---
 
@@ -80,40 +77,7 @@ This is where the true power of CivicTrack lies. This is the "why" of the projec
 * **Maps:** React Leaflet (Open Source)
 * **Charts:** Recharts (Open Source)
 
-
-
-```markdown
-## 🚀 Live Demo
-
-You can try the live application here: **[https://civictrack-puce.vercel.app/](https://civictrack-puce.vercel.app/)**
-```
-
-
-## 📸 Screenshots
-
-| Report Form | Live Map | Dashboard |
-| :---: | :---: | :---: |
-| ![CivicTrack Report Form](public/screenshot-form.png) | ![CivicTrack Live Map](public/screenshot-map.png) | ![CivicTrack Dashboard](public/screenshot-dashboard.png) |
-```
-
-## 🛣️ Future Roadmap
-
-This MVP is a strong foundation. Future plans to expand the project include:
-
-* **Admin Dashboard:** A separate, password-protected area for admins to edit categories and map locations directly from the UI, without touching the code.
-* **"Resolved" Status:** Allowing admins to mark issues as "In Progress" or "Resolved," which would then change the pin's color on the live map.
-* **Map Search Bar:** Integrating a geocoding search bar so users can type their address instead of just clicking the map.
-```
-
-## ⚖️ License
-
-This project is open-source and available under the [MIT License](LICENSE).
-```
-
-*(To make this work, create a new file in your project's root folder named `LICENSE` and paste the text of the MIT license into it. You can find it by searching "MIT License text".)*
-
-
-
+---
 
 ## 🚀 Getting Started
 
@@ -122,9 +86,9 @@ To run this project for your own community, follow these steps:
 ### 1\. Clone the Repository
 
 ```bash
-git clone https://github.com/israelope/Civictrack.git
+git clone https://github.com/israelope/CivicTrack.git
 cd civictrack
-```
+````
 
 ### 2\. Install Dependencies
 
@@ -176,9 +140,9 @@ You can set the default map center and zoom level for your specific town, state,
 In both files, find the `CUSTOMIZE MAP LOCATION` comment block and change the `defaultCenter` and `defaultZoom` variables to match your region.
 
 ```javascript
-// Example for Oyo State, Nigeria:
-const defaultCenter: [number, number] = [7.3775, 3.9470];
-const defaultZoom = 9;
+// Example for Bengaluru, India:
+const defaultCenter: [number, number] = [12.97, 77.59];
+const defaultZoom = 11;
 ```
 
 ### 2\. Customize Complaint Categories
@@ -195,5 +159,22 @@ To change the types of issues users can report, edit the `<option>` tags in the 
   <option value="" disabled>Select a category</option>
   <option value="Pothole">Pothole</option>
   <option value="Trash Buildup">Trash Buildup</option>
-  </select>
+  <option value="New Community Park">New Community Park</option>
+</select>
 ```
+
+-----
+
+## 🛣️ Future Roadmap
+
+This MVP is a strong foundation. Future plans to expand the project include:
+
+  * **Admin Dashboard:** A separate, password-protected area for admins to edit categories and map locations directly from the UI, without touching the code.
+  * **"Resolved" Status:** Allowing admins to mark issues as "In Progress" or "Resolved," which would then change the pin's color on the live map.
+  * **Map Search Bar:** Integrating a geocoding search bar so users can type their address instead of just clicking the map.
+
+-----
+
+## ⚖️ License
+
+This project is open-source and available under the [MIT License](https://www.google.com/search?q=LICENSE).
